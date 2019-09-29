@@ -1,0 +1,27 @@
+<mat-toolbar *ngIf="show">
+	<img [src]="user.image" alt="Avatar">
+	<div class="name">{{user.name}}</div>
+</mat-toolbar>
+<div class="board" *ngIf="show" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+	<div class="wrap" *ngFor="let message of messageArray" >
+	<div style="width:100%">
+	<div class="message" *ngIf="message.sender!==id.name">
+		{{message.message}}
+	</div>
+     </div>
+	<br *ngIf="message.sender!==id.name">
+	<br *ngIf="message.sender!==id.name">
+	<br *ngIf="message.sender!==id.name">
+	<div class="reply" *ngIf="message.sender==id.name">
+	    {{message.message}}
+	</div>
+	<br *ngIf="message.sender==id.name">
+	<br *ngIf="message.sender==id.name">
+	<br *ngIf="message.sender==id.name">
+    </div>
+</div>
+<mat-toolbar *ngIf="show">
+	    <textarea [(ngModel)]="message" type="text" placeholder="Type your message" class="mess"></textarea>
+        <mat-icon class="send" (click)="send(message)" *ngIf="message!==''">send</mat-icon>
+</mat-toolbar>
+

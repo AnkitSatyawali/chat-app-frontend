@@ -1,0 +1,14 @@
+<mat-card class="frame">
+	<div class="sh">
+	<input type="text" class="search" [(ngModel)]="searchText" (ngModelChange)="filt()"placeholder="enter text"><mat-icon>search</mat-icon></div>
+	<mat-card class="suser" *ngFor="let user of users;let i=index" (click)="userSelected(user,i)">
+		<img [src]="user.image" alt="Avatar">
+		<div class="content">
+			{{user.name}}<br><br>
+			{{user.about}}
+                
+		</div>
+		<span class="dot" *ngIf="noti[i]"></span>
+			
+	</mat-card>
+</mat-card>

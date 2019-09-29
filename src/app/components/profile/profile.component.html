@@ -1,0 +1,83 @@
+<mat-toolbar>
+	<img class="logo" src="../../../assets/image/logo.png" routerLink="/chats">
+	U-Chat
+	<span class="example-spacer"></span>
+   <div>
+    <img src="https://hsc.unm.edu/community/assets/img/faces/no-image.png" alt="image" *ngIf="!user" class="rh">
+    <img [src]="user.image" alt="image" *ngIf="user" class="rh" [matMenuTriggerFor]="drop">
+  </div>
+  <mat-menu #drop="matMenu">
+  <button mat-menu-item class="sub" routerLink="/profile"><mat-icon>account_circle</mat-icon>Profile</button>
+  <button mat-menu-item class="sub" (click)="Logout()"><mat-icon>power_settings_new</mat-icon>Logout</button>
+   </mat-menu>
+</mat-toolbar>
+<div class="content">
+	<div class="profile-image">
+		<div class="profile-image-inner">
+		<img [src]="imagePreview" *ngIf="check">
+		<img [src]="user.image" alt="image" *ngIf="user && !check">
+		<img src="https://hsc.unm.edu/community/assets/img/faces/no-image.png" alt="image" *ngIf="!user && !check">
+	    </div>
+	    <div class="camera-icon"><mat-icon class="camera-inner" matTooltip="Update profile photo" (click)="filePicker.click()">camera_enhance</mat-icon></div>
+	    <input style="display: none;" name="image" type="file" #filePicker accept="image/*" (change)="onImagePicked($event.target.files)" />
+        
+
+	</div>
+    <div class="profile-info" *ngIf="user">
+    	<div class="profile-info-inner">
+	    	   <div class="block">
+		    		<div class="label">
+		    			Username<mat-icon class="edit" matTooltip="Edit username" (click)="opene()">create</mat-icon>
+		    		</div>
+		    		<div class="answer" *ngIf="!showemail">
+		    			{{user.name}}
+		    		</div>
+		    		<div class="answer" *ngIf="showemail">
+		    		   <form #updateForm="ngForm" (submit)="onEmail(updateForm)">
+		    			<mat-form-field>
+				                <input matInput name="username" [(ngModel)]="user.name" type="text" #username required>
+				                <mat-error>Please enter the valid email</mat-error>
+				        </mat-form-field>
+				        <div><button mat-raised-button [disabled]="updateForm.invalid" class="save" type="submit">Save</button></div>
+				    </form>
+		    		</div>
+	    	   </div>
+	    	   <div class="block">
+		    		<div class="label">
+		    			Status<mat-icon class="edit" matTooltip="Update status" (click)="opena()">create</mat-icon>
+		    		</div>
+		    		<div class="answer" *ngIf="!showstatus">
+		    			{{user.about}}
+		    		</div>
+		    		<div class="answer" *ngIf="showstatus">
+		    		   <form #updateForm="ngForm" (submit)="onStatus(updateForm)">
+		    			<mat-form-field>
+				                <input matInput name="about" [(ngModel)]="user.about" type="text" #about required>
+				                <mat-error>Please enter the status</mat-error>
+				        </mat-form-field>
+				        <div><button mat-raised-button [disabled]="updateForm.invalid" class="save" type="submit">Save</button></div>
+				    </form>
+		    		</div>
+	    	   </div>
+	    	   <div class="block">
+		    		<div class="label">
+		    			Email<mat-icon class="edit" matTooltip="Change email" (click)="openn()">create</mat-icon>
+		    		</div>
+		    		<div class="answer" *ngIf="!showUsername">
+		    			{{user.email}}
+		    		</div>
+		    		<div class="answer" *ngIf="showUsername">
+		    		   <form #updateForm="ngForm" (submit)="onUsername(updateForm)">
+		    			<mat-form-field>
+				                <input matInput name="email" [(ngModel)]="user.email" type="text" #email required>
+				                <mat-error>Please enter the valid email</mat-error>
+				        </mat-form-field>
+				        <div><button mat-raised-button [disabled]="updateForm.invalid" class="save" type="submit">Save</button></div>
+				    </form>
+		    		</div>
+	    	   </div>
+
+
+    	</div>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+ <div class="clos"><span class="clsbtn" (click)="onNoClick()"><i class="fas fa-times"></i></span></div>
+
+<mat-tab-group color="primary">
+  <mat-tab label="Login">
+  	<form class="fo" #loginForm="ngForm" (submit)="onLogin(loginForm)">
+  	  <div class="fields">
+        <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput name="email" ngModel type="email" required>
+                <mat-error>Please enter the valid email</mat-error>
+        </mat-form-field>
+        <mat-form-field >
+                <mat-label>Password</mat-label>
+                <input matInput name="password" ngModel minlength="10" type="password" #input required>
+                <mat-error>Please enter the password</mat-error>
+        </mat-form-field>
+       <button mat-raised-button [disabled]="loginForm.invalid" class="bn" style="color:white" [ngClass]="{'dis':!loginForm.valid}"type="submit" (click)="onNoClick()">Submit</button>
+     </div>
+  	</form>
+  </mat-tab>
+  <mat-tab label="Signup">
+  	<form class="fo" #signupForm="ngForm" (submit)="onSignup(signupForm)">
+  	  <div class="fields">
+  		<mat-form-field>
+                <mat-label>Username</mat-label>
+                <input matInput name="username" ngModel type="text" required>
+                <mat-error>Please enter the username</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput name="email" ngModel type="email" required>
+                <mat-error>Please enter the valid email</mat-error>
+        </mat-form-field>
+        <mat-form-field >
+                <mat-label>Password</mat-label>
+                <input matInput name="password" ngModel minlength="10" type="password" #input required>
+                <mat-error>Please enter the password</mat-error>
+        </mat-form-field>
+       <button mat-raised-button [disabled]="signupForm.invalid" class="bn" type="submit" style="color:white" [ngClass]="{'dis':!loginForm.valid}" (click)="onNoClick()">Submit</button>
+     </div>
+  	</form>
+  </mat-tab>
+
+</mat-tab-group>

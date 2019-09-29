@@ -1,0 +1,29 @@
+<mat-toolbar>
+	<img class="logo" src="../../../assets/image/logo.png">
+	U-Chat
+
+<form class="example-form" *ngIf="seh">
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="enter name" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option class="op" *ngFor="let option of filteredOptions | async" [value]="option.name" (click)="selectedUser(option)">
+      	<div style="display: flex">
+        <img class="image"[src]="option.image" alt="Avatar"><div class="name" >{{option.name}}</div></div>
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+<mat-icon (click)="open()" *ngIf="seh" class="ic">search</mat-icon>
+	<span class="example-spacer"></span>
+	<mat-icon class="search" *ngIf="!seh" matTooltip="tap to search" (click)="open()">search</mat-icon>
+  <div>
+    <img src="https://hsc.unm.edu/community/assets/img/faces/no-image.png" alt="image" *ngIf="!user" class="rh">
+    <img [src]="user.image" alt="image" *ngIf="user" class="rh" [matMenuTriggerFor]="drop">
+  </div>
+  <mat-menu #drop="matMenu">
+  <button mat-menu-item class="sub" routerLink="/profile"><mat-icon>account_circle</mat-icon>Profile</button>
+  <button mat-menu-item class="sub" click="Logout()"><mat-icon>power_settings_new</mat-icon>Logout</button>
+   </mat-menu>
+	<!-- <mat-icon class="btn" (click)="Logout()">power_settings_new</mat-icon><span class="btn" (click)="Logout()">Logout</span> -->
+</mat-toolbar>
+

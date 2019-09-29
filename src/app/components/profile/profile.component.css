@@ -1,0 +1,87 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+.logo{
+	height:60px;
+	width:70px;
+}
+.logo:hover{
+    cursor:pointer;
+}
+mat-toolbar{
+	background-color:#aaf7eb;
+	box-shadow: 0 8px 6px -5px #999;
+}
+.rh{
+	border-radius: 50%;
+	height: 50px;
+	width: 50px;
+	padding-top: 15px;
+	padding-bottom: 10px
+}
+.sub{
+	font-family: kabiro;
+}
+.content{
+	width:100%;
+	display: flex;
+	height:90vh;
+	margin-top:10px;
+}
+.profile-image{
+	width:33%;
+	height:100%;
+}
+.profile-image-inner {
+	height:60%;
+	margin-left: 15%;
+	margin-top:5%;
+}
+img{
+	width:100%;
+	height:100%;
+	border-radius: 25px;
+}
+.camera-icon{
+    text-align: center;
+    padding-top:1rem;
+    margin-left: 15px
+}
+.camera-inner{
+	font-size:3.5rem;
+}
+.camera-inner:hover{
+	cursor: pointer;
+}
+.profile-info{
+	width: 77%;
+}
+.profile-info-inner{
+	padding-top:5%;
+	padding-left:12%;
+	padding-right: 10%;
+}
+.block{
+    margin-bottom:2rem;    
+}
+.label{
+    font-size: 1.5rem;
+    font-family:kabiro;
+    margin-bottom:1rem;
+    padding-right:2rem;
+}
+.answer{
+	padding-left:5px;
+}
+.edit{
+	float:right;
+}
+mat-form-field{
+	width:80%;
+}
+.edit:hover{
+	cursor:pointer;
+}
+.save{
+	background-color:#00FF90;
+}

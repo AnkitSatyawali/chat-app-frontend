@@ -1,0 +1,38 @@
+.main{
+	padding-right:0%;
+   display: flex;
+   
+}
+.homeimage{
+	width:50%;height:92vh;
+	padding-top:4vh;
+	padding-bottom: 4vh;
+    justify-content: flex-end;
+}
+img{
+	width:90%;
+	height:100%;
+}
+.butn{
+	width:50%;
+	display: table;
+	height:92vh;
+}
+.but {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+.wel{
+	width:40%;
+	font-size: 21px; 
+	font-family: kabiro;
+	height:9%;
+}
+
+.know {
+	width:30%;
+	font-family: kabiro;
+	font-size:19px;
+	height: 9%
+}
