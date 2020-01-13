@@ -18,6 +18,11 @@ img{
 	display: table;
 	height:92vh;
 }
+.butni{
+	width:50%;
+	display: none;
+	height:92vh;
+}
 .but {
 	display: table-cell;
 	vertical-align: middle;
@@ -25,7 +30,7 @@ img{
 }
 .wel{
 	width:40%;
-	font-size: 21px; 
+	font-size: 21px;
 	font-family: kabiro;
 	height:9%;
 }
@@ -33,6 +38,91 @@ img{
 .know {
 	width:30%;
 	font-family: kabiro;
-	font-size:19px;
+	font-size:21px;
 	height: 9%
+}
+.wel:hover{
+	background-color: #00C7FF;
+}
+.know:hover{
+	background-color: #00C7FF;
+}
+@media screen and (max-width:1015px)
+{
+	img{
+		height: 70%;
+		width:100%;
+		margin-top:6rem;
+	}
+}
+@media screen and (max-width:1000px)
+{
+	.wel{
+		font-size: 1rem;
+	}
+	.know{
+		font-size: 1rem;
+	}
+}
+@media screen and (max-width:820px)
+{
+	.wel{
+		font-size: 0.8rem;
+	}
+	.know{
+		font-size: 0.8rem;
+	}
+}
+@media screen and (max-width: 630px)
+{
+	img{
+		height:410px;
+		width:76%;
+		margin-top: 0;
+	}
+	.main{
+  	display:block;
+  }
+  .butni{
+  	display: block;
+  	margin-top: 2rem;
+  	text-align: center;
+  	width:100%;
+  }
+  .butn{
+  	display: none;
+  }
+  .but{
+  	width:50%;
+  	display: inline-block;
+  }
+  .wel{
+  	width:80%;
+  }
+  .know{
+  	width:80%;
+  }
+  .homeimage{
+  	text-align: center;
+  	padding-top:5vh;
+  	padding-bottom: 1vh;
+  	width:100%;
+  	height:auto;
+  }
+	@media screen and (max-width: 510px) {
+  img{
+  	height:80%;
+  	width:80%;
+  }
+  @media screen and (max-width: 369px){
+  	.wel{
+  		padding:1px;
+  		width:100%;
+  	}
+  	.know{
+  		padding:1px;
+  		width:100%;
+  	}
+  }
+}
 }

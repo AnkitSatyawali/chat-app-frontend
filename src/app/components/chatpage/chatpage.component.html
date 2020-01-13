@@ -1,5 +1,9 @@
 <app-header></app-header>
 <div class="mainbody">
   <app-userlist class="part1"></app-userlist>
-  <app-chatlist class="part2"></app-chatlist>
+  <app-chatlist [ngClass]="{'part2':show}"></app-chatlist>
+<div class="part2" *ngIf="!show">
+  	<img src="../../../assets/image/start.png">
+  	<div class="centered">Start Chats with Friends</div>
+  </div>
 </div>

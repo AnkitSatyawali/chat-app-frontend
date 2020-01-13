@@ -1,0 +1,20 @@
+<div mat-dialog-content>
+  <mat-list>
+  	<mat-list-item *ngFor="let f of fileArray;let i=index">
+  			<mat-divider></mat-divider>
+		    <mat-icon mat-list-icon>note</mat-icon>
+		    <h4 mat-line>{{f.name}}</h4>
+		    <span class="spacing"></span>
+		    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="remove(i)">
+    		<mat-icon>close</mat-icon>
+  </button>
+		    <p mat-line> {{(f.size/1000 | number:'.1-1')}}kB </p>
+  </mat-list-item>
+  </mat-list>
+  <mat-divider></mat-divider>
+</div>
+<div class="buttons">
+  <button mat-raised-button (click)="onNoClick()">Cancel</button>
+  <span class="spacing"></span>
+  <button mat-raised-button (click)="sendMessage()">Send</button>
+</div>

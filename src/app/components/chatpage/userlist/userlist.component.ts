@@ -17,6 +17,8 @@ noti=[];
 inde;
 id;
 active;
+flag=false;
+activeArray = [];
 
   constructor(private authService : AuthService,private userService : UserService,private chatService : ChatService) { }
  
@@ -29,6 +31,8 @@ active;
     this.userService.notification.subscribe(data =>{
       console.log(data);
       this.active = data;
+
+      this.flag = true;
     })
       this.authService.getId().subscribe(data => {
       this.id = data;
@@ -39,10 +43,13 @@ active;
       this.rooms = data.rooms;
       this.tempusers = data.friends;
       let i;
+      if(this.users.length>0)
+        this.flag=true;
       console.log(this.users);
       console.log(this.rooms);
       for(i=0;i<this.users.length;i++)
       {
+        this.activeArray[i]=false;
         if(this.users[i].image.slice(0,5)!='https')
         this.users[i].image = API_URL +this.users[i].image;
       }
@@ -70,6 +77,11 @@ active;
     })
     this.userService.added.subscribe(user => {
       this.users.push(user);
+      this.activeArray[this.users.length-1]= true;
+    })
+    this.authService.userAddedSuccessfully().subscribe(data => {
+      this.users.push(data);
+      console.log(data);
     })
     this.chatService.newMessageReceived()
         .subscribe(data=>{
@@ -97,6 +109,10 @@ active;
   userSelected(user,i){
     console.log(user);
     this.noti[i]=false;
+    for(let j=0;j<this.users.length;j++){
+      this.activeArray[j]=false;
+    }
+    this.activeArray[i]=true;
     this.authService.getRoomName(user.id).subscribe(name => {
         console.log(name.data._id);
         this.userService.emitname(name.data._id);

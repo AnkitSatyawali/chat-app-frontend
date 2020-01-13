@@ -12,11 +12,13 @@ export class UserService {
   private noti = new Subject<Object>();
   private noti2 = new Subject<Object>();
   private addedUser = new Subject<Object>();
+  private sendFiles = new Subject<Array<string>>();
   userInfo = this.userFun.asObservable();
   RoomName = this.roomName.asObservable();
   added = this.addedUser.asObservable();
   notification = this.noti.asObservable();
   notif = this.noti2.asObservable();
+  sendFilesnoti = this.sendFiles.asObservable();
   emit(user)
   {
   	this.userFun.next(user);
@@ -38,5 +40,9 @@ export class UserService {
   emitnotif(index)
   {
     this.noti2.next(index);
+  }
+  emitFiles(filesArray : Array<string>)
+  {
+    this.sendFiles.next(filesArray);
   }
 }

@@ -7,6 +7,9 @@ img {
 	padding-bottom: 10px
 
 }
+.backimage{
+	background-image: url("../../../../assets/image/email-pattern.png");
+}
 mat-toolbar{
 	display:flex;
 	background-color:#9ed8ce;
@@ -17,7 +20,7 @@ mat-toolbar{
 .board{
 	width:100%;
 	height:67.3vh;
-	overflow-y: scroll
+	overflow-y: auto
 }
 mat-form-field {
 	width:100%;
@@ -25,10 +28,10 @@ mat-form-field {
 }
 .mess{
 	padding-bottom: 0rem;
-	width:90%;
+	width:85%;
 	border:none;
 	height:80%;
-	border-radius: 3rem;
+	border-radius : 3rem 0rem 0rem 3rem;
 	margin-left: -10px;
 	padding-left: 20px;
 	padding-top: 4px;
@@ -46,6 +49,17 @@ mat-form-field {
 }
 .send:hover{
 	cursor: pointer
+}
+.attachicon:hover{
+	cursor:pointer;
+}
+.attachicon {
+	margin:13px;
+}
+.attachment {
+	background-color: white;
+	height: 85%;
+	border-radius: 0rem 3rem 3rem 0rem;
 }
 .message {
 	margin-left: 2rem;
@@ -65,9 +79,69 @@ mat-form-field {
 	word-wrap: break-word;
 	line-height: 1.4rem;
 }
+.filemess{
+	width:36%;
+	margin-left: 2rem;
+	border:1px solid #fcf9f9;
+	border-radius: 0.6rem;
+	height:auto;
+	
+	background-color: white;
+}
+.filereply{
+	
+	/*border:1px solid #fcf9f9;*/
+	border-radius: 0.6rem;
+	width:36%;
+	height:auto;
+	background-color: #8bede1; 
+	margin-left: 60%;
+}
+.fileimg:hover {
+	cursor:pointer;
+}
+.iconu{
+	vertical-align: bottom;
+	font-size: 1.2rem;
+
+}
+.uniquefile{
+	padding-top:1.5rem;
+	padding-left:1.5rem;
+	padding-right:1.5rem;
+}
+.fileimg{
+	width:100%;
+	height:200px;
+	margin-left: 0;
+	border-radius: 0;
+}
 .line{
 	width: 100%;
 	background-color: black
+}
+.userspace{
+	margin-left:67%;
+}
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background:#aaf7eb; 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background:#82c0b7; 
 }
 .reply{
 	margin-right: 2rem;
@@ -86,4 +160,55 @@ mat-form-field {
 	margin-left: 68%;
 	word-wrap: break-word;
 	line-height: 1.4rem;
+}
+/*@media screen and (max-width:983px)
+{
+	.userspace{
+		margin-left: 43%;
+	}
+}*/
+
+@media screen and (max-width: 1130px)
+{
+	.userspace{
+		margin-left: 61%;
+	}
+}
+@media screen and (max-width: 1069px)
+{
+	.userspace{
+		margin-left: 57%;
+	}
+}
+@media screen and (max-width: 954px)
+{
+	.userspace{
+		margin-left: 54%;
+	}
+}
+@media screen and (max-width: 893px)
+{
+	.userspace{
+		margin-left: 51%;
+	}
+}
+@media screen and (max-width: 805px)
+{
+	.userspace{
+		margin-left: 47%;
+	}
+}
+@media screen and (max-width: 738px)
+{
+	.userspace{
+		margin-left: 42%;
+		
+	}
+}
+@media screen and (max-width: 678px)
+{
+	
+	.resimg{
+		margin-left: 0;
+	}
 }

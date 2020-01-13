@@ -1,14 +1,17 @@
 <mat-card class="frame">
-	<div class="sh">
+	<div class="absenttext" *ngIf="!flag">To add a person as a friend click on the <mat-icon class="absenticon">search</mat-icon> icon on the right corner of the header and search the person username</div>
+	<div class="sh" *ngIf="flag">
 	<input type="text" class="search" [(ngModel)]="searchText" (ngModelChange)="filt()"placeholder="enter text"><mat-icon>search</mat-icon></div>
-	<mat-card class="suser" *ngFor="let user of users;let i=index" (click)="userSelected(user,i)">
+	<div class="us" *ngIf="flag">
+	<mat-card class="suser" [ngClass]="{'addition':activeArray[i]}" *ngFor="let user of users;let i=index" (click)="userSelected(user,i)">
 		<img [src]="user.image" alt="Avatar">
 		<div class="content">
-			{{user.name}}<br><br>
-			{{user.about}}
+			<div class="content_name">{{user.name}}</div>
+			<div class="content_status">{{user.about}}</div>
                 
 		</div>
 		<span class="dot" *ngIf="noti[i]"></span>
 			
 	</mat-card>
+   </div>
 </mat-card>

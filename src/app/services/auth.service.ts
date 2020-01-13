@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as io from 'socket.io-client';
 import { CookieService } from 'ngx-cookie-service';
 import {Router} from '@angular/router';
 import API_URL from '../config/API_URL';
@@ -9,6 +10,7 @@ import API_URL from '../config/API_URL';
 })
 export class AuthService {
 get;
+private socket = io('https://uchatappbackend.herokuapp.com');
   constructor(private router: Router,private http:HttpClient,private cookieService:CookieService ) { }
    httpOptions = {
     headers: new HttpHeaders({
@@ -33,7 +35,7 @@ get;
       
       headers: new HttpHeaders({
   
-        'authorization':  this.getUserToken()
+        'authorization':  this.cookieService.get('authorization')
   
       })
     };
@@ -102,5 +104,23 @@ get;
       file.append('image',image);
       return this.http.post<any>(`${API_URL}userAuth/updateuserimage`,file,this.httpOptions);
     }
+    userAdded(data,id){
+      const newData = {
+        data : data,
+        id : id
+      };
+      this.socket.emit('newFriend',newData);
+    }
+    userAddedSuccessfully(){
+      let observable = new Observable<any>(observer=>{
+            this.socket.on('new Friend', (data)=>{
+                observer.next(data);
+            });
+            return () => {this.socket.disconnect();}
+        });
+
+        return observable;
+    }
+
 } 
 

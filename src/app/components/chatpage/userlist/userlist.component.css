@@ -2,23 +2,40 @@
 	width:100%;
 	height: 88.5vh;
 	padding: 0px;
-	overflow-y: scroll;
+	
 }
 .suser{
 	width:100%;
-	height: 70px;
+	height: fit-content;
+	height:  -moz-max-content;
 	padding: 0px;
 	border-radius: 0px;
 	border-bottom: 1px solid lightgrey;
 	display: flex;
 }
+.suser:hover{
+	cursor:pointer;
+	background-color: #98feeb
+}
 .sh{
 	display: flex;
 	margin-bottom:0.5rem;
 }
+.addition{
+	background-color: #98feeb;
+}
+.us{
+	height:80vh;
+	overflow-y: auto;
+	border-top:1px solid gainsboro;
+}
 mat-icon{
 	font-size: 1.7rem;
 	padding-top:0.5rem;
+}
+.absenticon{
+	font-size: 1.3rem;
+	padding-top: 0;
 }
 mat-icon:hover{
 	cursor: pointer
@@ -53,9 +70,17 @@ img {
 
 }
 .content{
-	padding-top: 15px;
+	padding-top: 10px;
 	padding-left: 20px;
-	line-height: 0.9rem;
+	overflow: hidden;
+}
+.content_name{
+	font-weight: 900;
+	font-size:1.4vw;
+}
+.content_status{
+	font-size: 1.1vw;
+	padding-top: 0.4rem;
 }
 .search{
 	width:90%;
@@ -76,3 +101,15 @@ img {
 	margin-left: auto;
 	margin-top: 1.2rem;
 }
+.absenttext{
+	font-size: 1.4rem;
+	padding:2rem;
+	padding-top:60%;
+	color:#07f7c7;
+}
+@media screen and (max-width: 1120px) {
+	img{
+		margin-left: 30px
+	}
+}
+

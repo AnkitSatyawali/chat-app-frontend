@@ -14,6 +14,10 @@ import { ChatpageComponent } from './components/chatpage/chatpage.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { CookieService } from 'ngx-cookie-service';
 import { ProfileComponent } from './components/profile/profile.component';
+import { SendfileComponent } from './components/chatpage/chatlist/sendfile/sendfile.component';
+import { OpenimageComponent } from './components/chatpage/chatlist/openimage/openimage.component';
+import { TestVideoComponent } from './components/chatpage/chatlist/test-video/test-video.component';
+import { AudiochatComponent } from './components/chatpage/chatlist/audiochat/audiochat.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +27,11 @@ import { ProfileComponent } from './components/profile/profile.component';
     HomeComponent,
     ChatpageComponent,
     AuthComponent,
-    ProfileComponent
+    ProfileComponent,
+    SendfileComponent,
+    OpenimageComponent,
+    TestVideoComponent,
+    AudiochatComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +44,6 @@ import { ProfileComponent } from './components/profile/profile.component';
   ],
   providers: [HttpClient,CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [AuthComponent]
+  entryComponents: [AuthComponent,SendfileComponent,OpenimageComponent,AudiochatComponent]
 })
 export class AppModule { }

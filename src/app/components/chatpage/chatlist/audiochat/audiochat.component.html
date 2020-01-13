@@ -1,0 +1,14 @@
+<div class="main">
+	<div style="height:100%;width:50%">
+		<video height="500" #myVideo>
+		</video>
+	</div>
+	<div style="height:100%;width:50%">
+		<img class="userimage" *ngIf="!peersrc"[src]="image">
+		<video height="500" *ngIf="peersrc"#otherVideo>
+		</video>
+	</div>
+</div>
+<div class="buttons">
+  <button mat-raised-button style="background-color: red;color:white"(click)="endCall()"><mat-icon>call_end</mat-icon></button>
+</div>

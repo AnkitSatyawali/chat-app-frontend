@@ -29,8 +29,7 @@ myControl = new FormControl();
     })
     this.authService.getAllUsers().subscribe(data => {
     	this.users = data;
-      if(this.user.image.slice(0,5)!='https')
-        this.user.image = API_URL +this.user.image;
+      
     	console.log(this.users);
     },err=> {
     	console.log(err);
@@ -42,6 +41,8 @@ myControl = new FormControl();
       );
      this.authService.getLoggedUser().subscribe(data =>{
       this.user = data.result;
+      if(this.user.image.slice(0,5)!='https')
+        this.user.image = API_URL +this.user.image;
       console.log(data);
     })
   }
@@ -51,6 +52,7 @@ myControl = new FormControl();
     return this.users.filter(option => option['name'].toLowerCase().includes(filterValue));
   }
   Logout(){
+    console.log("clicked");
   	this.authService.logout();
   } 
   selectedUser(user)
@@ -71,6 +73,7 @@ myControl = new FormControl();
     console.log(user);
     this.authService.getRoomName(user.id).subscribe(name => {
         console.log(name.data._id);
+        this.authService.userAdded(user,name.data._id);
         this.userService.emitname(name.data._id);
     },err => {
       console.log(err);

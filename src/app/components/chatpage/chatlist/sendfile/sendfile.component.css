@@ -1,0 +1,12 @@
+.spacing{
+	margin-left: 5%;
+}
+.buttons {
+	text-align: center;
+	padding-top:1rem;
+}
+.buttons>button{
+	background-color: #4494f2;
+	color:white;
+	font-weight: bold;
+}

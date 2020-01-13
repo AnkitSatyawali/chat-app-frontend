@@ -1,27 +1,101 @@
-<mat-toolbar *ngIf="show">
-	<img [src]="user.image" alt="Avatar">
+<div class="backimage">
+	<mat-toolbar *ngIf="show">
+	<img [src]="user.image" class="resimg" alt="Avatar">
 	<div class="name">{{user.name}}</div>
+	<span class="userspace"></span>
+	<!-- <div style="float:right">
+		
+		<button mat-button mat-icon-button
+	 	(click)="voiceCall()" matTooltip="Voice Call">
+	 		<mat-icon>call</mat-icon>
+	 	</button>
+		<button mat-button mat-icon-button   
+		(click)="videoCall()" style="margin-left:1rem" matTooltip="Video Call">
+			<mat-icon>videocam</mat-icon>
+		</button>
+
+	</div> -->
+
 </mat-toolbar>
 <div class="board" *ngIf="show" #scrollMe [scrollTop]="scrollMe.scrollHeight">
 	<div class="wrap" *ngFor="let message of messageArray" >
 	<div style="width:100%">
-	<div class="message" *ngIf="message.sender!==id.name">
-		{{message.message}}
+	<div class="message" *ngIf="message.sender!==id.name && !message.isFile">
+		<span style="font-weight:700">{{message.message}}</span>
+		<div style="text-align: right;font-weight:500;font-size: 1vw;padding-top: 0.5rem" >
+			<span>{{message.time}}</span>
+		</div>
 	</div>
+	<div class="filemess" *ngIf="message.sender!==id.name && message.isFile">
+		<!-- <iframe [src]="refactorurl(message.message)" class="fileimg" frameborder="0"></iframe> -->
+		<!-- <img [src]="refactorurl(message.message)" class="fileimg" alt="image"> -->
+		<img *ngIf="checkCondition(message.message)" [src]="refactorurl(message.message)" class="fileimg" alt="image" (click)="openImage(message.message)">
+		<div *ngIf="checkCondition(message.message)" style="text-align: center;padding-bottom:0.5rem">
+					<a [href]="refactorurl(message.message)" target="_blank"  download>
+						<mat-icon class="iconu">get_app</mat-icon>
+						<span>Download</span>
+					</a>
+			</div>
+		<div *ngIf="checkCondition(message.message)" style="text-align:right;padding-bottom:0.5rem;padding-right:0.5rem;font-weight:500;font-size: 1vw;padding-top: 0.5rem">
+				<span>{{message.time}}</span>
+		</div>
+		<div *ngIf="!checkCondition(message.message)" class="uniquefile"><span>{{editName(message.message)}}</span>
+			<div style="text-align: center;margin-top: 1rem">
+					<a [href]="refactorurl(message.message)" target="_blank" download>
+						<mat-icon class="iconu">get_app</mat-icon>
+						<span>Download</span>
+					</a>
+			</div>
+			<div style="text-align:right;padding-bottom:0.5rem;padding-left:1rem; font-weight:500;font-size: 1vw;padding-top: 0.5rem">
+				<span>{{message.time}}</span>
+			</div>
+		</div>
      </div>
 	<br *ngIf="message.sender!==id.name">
 	<br *ngIf="message.sender!==id.name">
 	<br *ngIf="message.sender!==id.name">
-	<div class="reply" *ngIf="message.sender==id.name">
-	    {{message.message}}
+	<div class="reply" *ngIf="message.sender==id.name && !message.isFile">
+	    <span style="font-weight:700">{{message.message}}</span>
+		<div style="text-align:right;font-weight:500;font-size: 1vw;padding-top: 0.5rem;">
+			<span>{{message.time}}</span>
+		</div>
+	</div>
+	<div class="filereply" *ngIf="message.sender==id.name && message.isFile">
+		<img *ngIf="checkCondition(message.message)" [src]="refactorurl(message.message)" class="fileimg" alt="image" (click)="openImage(message.message)">
+		<div *ngIf="checkCondition(message.message)" style="text-align: center;padding-bottom:0.5rem">
+					<a [href]="refactorurl(message.message)" target="_blank" download>
+						<mat-icon class="iconu">get_app</mat-icon>
+						<span>Download</span>
+					</a>
+			</div>
+		<div *ngIf="checkCondition(message.message)" style="text-align:right;padding-bottom:0.5rem;font-weight:500;font-size: 1vw;padding-top: 0.5rem;padding-right:1rem;">
+				<span>{{message.time}}</span>
+		</div>
+		<div *ngIf="!checkCondition(message.message)" class="uniquefile"><span>{{editName(message.message)}}</span>
+			<div style="text-align: center;margin-top: 1rem;padding-bottom: 0.5rem">
+					<a [href]="refactorurl(message.message)" target="_blank" download>
+					<mat-icon class="iconu">get_app</mat-icon>
+					<span>Download</span>
+				</a>				
+			</div>
+			<div style="text-align: right;padding-bottom:0.5rem;font-weight:500;font-size: 1vw;padding-top: 0.5rem;">
+				<span>{{message.time}}</span>
+			</div>
+		</div>
 	</div>
 	<br *ngIf="message.sender==id.name">
 	<br *ngIf="message.sender==id.name">
 	<br *ngIf="message.sender==id.name">
     </div>
 </div>
+</div>
 <mat-toolbar *ngIf="show">
 	    <textarea [(ngModel)]="message" type="text" placeholder="Type your message" class="mess"></textarea>
+	    <div class="attachment">
+	    	<mat-icon class="attachicon" (click)="filePicker.click()" matTooltip="Share files">playlist_add</mat-icon>
+	    	<input style="display: none;" type="file" #filePicker (change)="onImagePicked($event.target.files)" multiple/>
+	    </div>
         <mat-icon class="send" (click)="send(message)" *ngIf="message!==''">send</mat-icon>
 </mat-toolbar>
+</div>
 
