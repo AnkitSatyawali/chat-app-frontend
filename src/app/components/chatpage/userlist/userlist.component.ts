@@ -77,6 +77,11 @@ activeArray = [];
     })
     this.userService.added.subscribe(user => {
       this.users.push(user);
+      let i;
+      for(i=0;i<this.users.length;i++)
+      {
+        this.activeArray[i]=false;
+      }
       this.activeArray[this.users.length-1]= true;
     })
     this.authService.userAddedSuccessfully().subscribe(data => {
