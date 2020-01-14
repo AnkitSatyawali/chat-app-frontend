@@ -29,7 +29,12 @@ myControl = new FormControl();
     })
     this.authService.getAllUsers().subscribe(data => {
     	this.users = data;
-      
+      let i;
+      for(i=0;i<this.users.length;i++)
+      {
+          if(this.users[i].image.slice(0,5)!='https')
+            this.users[i].image = API_URL +this.users[i].image;
+      }
     	console.log(this.users);
     },err=> {
     	console.log(err);
