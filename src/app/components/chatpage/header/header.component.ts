@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { debounce } from 'lodash';
 import { AuthService } from '../../../services/auth.service';
 import { UserService } from '../../../services/user.service';
 import {Observable} from 'rxjs';
@@ -15,18 +17,27 @@ export class HeaderComponent implements OnInit {
 myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
+  results;
+  temps;
   seh=false;
   users;
   user;
   siz;
-  constructor(private userService:UserService,private authService : AuthService,private snackBar: MatSnackBar) { }
+  load=false;
+  httpOptions;
+  noResults=false;
+  constructor(private userService:UserService,private authService : AuthService,private snackBar: MatSnackBar,private httpClient: HttpClient) { 
+    this.search = debounce(this.search, 1000);
+    this.httpOptions = {
+      headers: new HttpHeaders({
+  
+        'authorization':  this.authService.getUserToken()
+  
+      })
+    };
+  }
 
   ngOnInit() {
-   
-    this.authService.getFriends().subscribe(data =>{
-       this.siz = data.friends.length;
-       console.log(this.siz);
-    })
     this.authService.getAllUsers().subscribe(data => {
     	this.users = data;
       let i;
@@ -35,37 +46,52 @@ myControl = new FormControl();
           if(this.users[i].image.slice(0,5)!='https')
             this.users[i].image = API_URL +this.users[i].image;
       }
-    	console.log(this.users);
+    	// console.log(this.users);
     },err=> {
     	console.log(err);
     })
-  	this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
      this.authService.getLoggedUser().subscribe(data =>{
       this.user = data.result;
       if(this.user.image.slice(0,5)!='https')
         this.user.image = API_URL +this.user.image;
-      console.log(data);
+      // console.log(data);
     })
   }
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-    
-    return this.users.filter(option => option['name'].toLowerCase().includes(filterValue));
-  }
+  search(event) {
+     const searchText = event.target.value;
+    // console.log(event);
+    this.load=true;
+    this.noResults=false;
+    this.httpClient.get<any>("https://gitforker-backend.herokuapp.com/userAuth/getallusers?name=" + searchText,this.httpOptions).subscribe(data =>{
+    this.temps = data;
+    this.load=false;
+    this.results = this.temps.users;
+    let i;
+    if(this.results){
+    for(i=0;i<this.results.length;i++)
+      {
+        if(this.results[i].image.slice(0,5)!='https')
+        this.results[i].image = API_URL +this.results[i].image;
+      }
+     }
+    if(this.temps.len==0)
+      this.noResults=true
+    else if(this.temps.len>0)
+    this.noResults=false;
+      if(searchText=="")
+      this.noResults=false;
+      // console.log(this.results);
+    });
+}
   Logout(){
-    console.log("clicked");
+    // console.log("clicked");
   	this.authService.logout();
   } 
-  selectedUser(user)
+  userSelected(user,roomName)
   {
-  	console.log(user);
-  	this.authService.makeFriends(user).subscribe(result => {
+  	// console.log(user);
+  	this.authService.makeFriends(user,roomName).subscribe(result => {
   		this.snackBar.open(result.message , "close",{duration: 5000});
-      this.userSelected(user);
   	})
   	this.userService.emituser(user);
   	this.seh=false;
@@ -74,12 +100,15 @@ myControl = new FormControl();
   {
   	this.seh = !this.seh;
   }
-  userSelected(user){
-    console.log(user);
+  selectedUser(user){
+    // console.log(user);
     this.authService.getRoomName(user.id).subscribe(name => {
-        console.log(name.data._id);
+        // console.log(name.data._id);
         this.authService.userAdded(user,name.data._id);
+        this.userService.emitName2(name.data._id);
         this.userService.emitname(name.data._id);
+        this.userService.emitSavedNoti({updatedBy:name.data.updatedBy,state:name.data.state});
+        this.userSelected(user,name.data._id);
     },err => {
       console.log(err);
     });

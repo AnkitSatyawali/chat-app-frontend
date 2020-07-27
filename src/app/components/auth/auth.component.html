@@ -14,7 +14,7 @@
                 <input matInput name="password" ngModel minlength="10" type="password" #input required>
                 <mat-error>Please enter the password</mat-error>
         </mat-form-field>
-       <button mat-raised-button [disabled]="loginForm.invalid" class="bn" style="color:white" [ngClass]="{'dis':!loginForm.valid}"type="submit" (click)="onNoClick()">Submit</button>
+       <button mat-raised-button [disabled]="loginForm.invalid" class="bn" style="color:white" [ngClass]="{'dis':!loginForm.valid}" (click)="onNoClick()" type="submit">Submit</button>
      </div>
   	</form>
   </mat-tab>

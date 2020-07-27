@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
+import * as bcrypt from 'bcryptjs';
+import * as CryptoJS from 'crypto-js';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import {Observable} from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import API_URL from '../config/API_URL'; 
 import { AuthService } from './auth.service';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  private socket = io('https://uchatappbackend.herokuapp.com');
+  // private socket = io('https://uchatappbackend.herokuapp.com');
+  private socket = io('https://gitforker-backend.herokuapp.com');
   httpOptions;
   constructor(private authService : AuthService,private router: Router,private http:HttpClient,private cookieService:CookieService) {
-  
 }
     
     joinRoom(roomname,name)
@@ -55,17 +58,27 @@ export class ChatService {
 
     sendMessage(dt)
     { 
-        console.log(dt);
+        // console.log(dt);
         let data=dt;
         this.httpOptions = {
     headers: new HttpHeaders({
 
       'authorization':  this.cookieService.get('authorization')
 
-    })
-  }; 
-        this.http.post<any>(`${API_URL}chats/sendMessage`,{roomName:data.roomName,receiver:data.receiver,message : data.message,time : data.time,isFile:data.isFile},this.httpOptions).subscribe(result => {
-            console.log(data);
+    }) 
+  };     
+  let encp;
+  // if(!this.cookieService.get(data.roomname))
+  //         {encp = CryptoJS.AES.encrypt(JSON.stringify(data.roomName+environment.appName),environment.appName).toString();
+  //       // let key = bcrypt.hashSync(this.rooms[i]+environment.appName);
+  //       this.cookieService.set(data.roomName,encp);
+  //                     // this.cookieService.set(data.roomname+environment.appName,salt);
+  //         }
+  //         else
+  //             encp = this.cookieService.get(data.roomname);
+           
+        this.http.post<any>(`${API_URL}chats/sendMessage`,{roomName:data.roomName,receiver:data.receiver,message : data.message,time : data.time,isFile:data.isFile,timeStamp:data.timeStamp},this.httpOptions).subscribe(result => {
+            // console.log(data);
             this.socket.emit('message',data);
         });    
     }
@@ -77,8 +90,21 @@ export class ChatService {
 
     })
   }; 
+        // console.log(this.httpOptions);
+        return this.http.get<any>(`${API_URL}chats/getMessge/${name}&&${1}`,this.httpOptions);
+    }
+    getMoreMessages(name,num,ts):Observable<any>
+    {
+         this.httpOptions = {
+    headers: new HttpHeaders({
+
+      'authorization':  this.cookieService.get('authorization')
+
+    })
+  }; 
+  // console.log(ts);
         console.log(this.httpOptions);
-        return this.http.get<any>(`${API_URL}chats/getMessge/${name}`,this.httpOptions);
+        return this.http.get<any>(`${API_URL}chats/getMessge/${name}&&${num}&&${ts}`,this.httpOptions);   
     }
     updateMessage(name){
         this.httpOptions = {
@@ -86,7 +112,7 @@ export class ChatService {
 
       'authorization':  this.cookieService.get('authorization')
 
-    })
+    }) 
   }; 
         this.http.post(`${API_URL}chats/update`,{roomName : name},this.httpOptions).subscribe();
     }
@@ -110,7 +136,9 @@ export class ChatService {
 
       'authorization':  this.cookieService.get('authorization')
 
-    })
+    }),  
+    reportProgress: true,  
+    observe: 'events'  
   }; 
         const fd = new FormData();
         for(let i=0;i<file.length;i++)

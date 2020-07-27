@@ -1,6 +1,6 @@
 <mat-toolbar>
-	<img class="logo" src="../../../assets/image/logo.png" routerLink="/chats">
-	U-Chat
+	<img class="logo" src="../../../assets/image/newlogocolor.png" routerLink="/chats">
+	GitForker
 	<span class="example-spacer"></span>
    <div>
     <img src="https://hsc.unm.edu/community/assets/img/faces/no-image.png" alt="image" *ngIf="!user" class="rh">
@@ -11,19 +11,57 @@
   <button mat-menu-item class="sub" (click)="Logout()"><mat-icon>power_settings_new</mat-icon>Logout</button>
    </mat-menu>
 </mat-toolbar>
-<div class="content">
+<div *ngIf="loading" class="content">
 	<div class="profile-image">
-		<div class="profile-image-inner">
+		<div class="container profile-image-inner">
 		<img [src]="imagePreview" *ngIf="check">
 		<img [src]="user.image" alt="image" *ngIf="user && !check">
 		<img src="https://hsc.unm.edu/community/assets/img/faces/no-image.png" alt="image" *ngIf="!user && !check">
+		<div class="camera-icon centered">
+			<mat-icon class="camera-inner" matTooltip="Update profile photo" (click)="filePicker.click()">camera_enhance</mat-icon>
+		</div>
+	    <input  style="display: none;" name="image" type="file" #filePicker accept="image/*" (change)="onImagePicked($event.target.files)" />
+	    
 	    </div>
-	    <div class="camera-icon"><mat-icon class="camera-inner" matTooltip="Update profile photo" (click)="filePicker.click()">camera_enhance</mat-icon></div>
-	    <input style="display: none;" name="image" type="file" #filePicker accept="image/*" (change)="onImagePicked($event.target.files)" />
+	    <div class="pi">
+	    	<div class="nm">{{user.name}}</div>
+	    	<div class="bio">{{user.about}}</div>
+	    	<div class="edit-profile"><button routerLink='/edit-profile'><i class="fas fa-edit"></i> Edit Profile</button>
+	    	</div>
+	    	<div class="fl"><i class="fas fa-users"></i> {{githubUser.followers}} Followers</div>
+	    	<div class="fl"><i class="fas fa-users"></i> {{githubUser.following}} Followings</div>
+	    	<!-- <div class="fl"><i class="fas fa-star"></i> 900 Stars</div> -->
+	    	<div class="location"><i class="fas fa-map-marker-alt"></i> {{githubUser.location}}</div>
+	    </div>
         
 
+	</div> 
+	<div class="repos_main">
+		<div class="heading">
+			Repositories
+		</div>
+		<div class="repos">
+			<div class="alignment" *ngFor="let repo of githubRepos">
+			<div class="repo_single">
+				<div><i class="fas fa-book"></i> <a href="{{repo.html_url}}" class="repo_link">  {{repo.name}}</a></div>
+				<div class="repo_description">{{repo.description}}</div>
+				<div *ngIf="!repo.description" style="padding-top: 1.45rem"></div>
+				<div class="repo_detail">
+					<div class="language">
+						<i class="fas fa-circle"></i> {{repo.language}}
+					</div>
+					<div class="stars">
+						<i class="fas fa-star"></i> {{repo.stargazers_count}}
+					</div>
+					<div class="branches">
+						<i class="fas fa-code-branch"></i> {{repo.forks}}
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
 	</div>
-    <div class="profile-info" *ngIf="user">
+    <!-- <div class="profile-info" *ngIf="user">
     	<div class="profile-info-inner">
 	    	   <div class="block">
 		    		<div class="label">
@@ -59,7 +97,7 @@
 				    </form>
 		    		</div>
 	    	   </div>
-	    	   <div class="block">
+	    	    <div class="block">
 		    		<div class="label">
 		    			Email<mat-icon class="edit" matTooltip="Change email" (click)="openn()">create</mat-icon>
 		    		</div>
@@ -75,9 +113,12 @@
 				        <div><button mat-raised-button [disabled]="updateForm.invalid" class="save" type="submit">Save</button></div>
 				    </form>
 		    		</div>
-	    	   </div>
+	    	   </div> -->
 
 
-    	</div>
-    </div>
+    	<!--</div>
+    </div> -->
+</div>
+<div *ngIf="!loading" class="loader-div">
+	<div class="loader">Loading...</div>
 </div>

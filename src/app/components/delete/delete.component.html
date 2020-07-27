@@ -1,0 +1,10 @@
+<div *ngIf="!isLoading">
+	<div mat-dialog-content>
+	Do you want to remove {{data.name}} from your friend list
+	</div> 
+<div class="buttons" *ngIf="!isLoading">
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="delete()" cdkFocusInitial>Yes</button>
+</div>
+</div>
+<mat-spinner *ngIf="isLoading"></mat-spinner>

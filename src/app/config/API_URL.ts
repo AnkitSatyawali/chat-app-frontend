@@ -1,1 +1,1 @@
-export default "https://uchatappbackend.herokuapp.com/"; 
+export default "https://gitforker-backend.herokuapp.com/"; 

@@ -62,5 +62,33 @@ mat-option-text{
 	padding-bottom: 10px
 }
 .sub{
-	font-family: kabiro;
+	font-family: 'Poppins';
+	font-weight:500;
+}
+.loader {
+	border: 6px solid #f3f3f3;
+	border-radius: 50%;
+	border-top: 6px solid blue;
+	border-bottom: 6px solid blue;
+	width: 20px;
+	margin:0px auto;
+	height: 20px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+  }
+.logonew{
+	color:white;
+	font-family: 'Poppins';
+	font-size:900;
+	font-weight:bold;
 }

@@ -7,6 +7,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./chatpage.component.css']
 })
 export class ChatpageComponent implements OnInit {
+
 show=false;
   constructor(private userService : UserService,private authService : AuthService) { }
  
@@ -17,7 +18,7 @@ show=false;
   			this.show = true;
   		else
   			this.show = false;
-  	})
+  	}) 
   }
-
+ 
 }

@@ -1,0 +1,23 @@
+.buttons {
+	text-align: center;
+	padding-top:1rem;
+}
+.od{
+	/*width:80%;*/
+	height:78%;
+}
+.im{
+	width:100%;
+	height:100%;
+}
+.txt{
+	text-align: center;
+	font-family: 'Poppins';
+	padding-top: 0.7rem;
+}
+.txta{
+	text-align: center;
+	font-family: 'Poppins';
+	padding-top: 0.7rem;
+	font-weight: 500;
+}

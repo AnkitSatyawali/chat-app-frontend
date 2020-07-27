@@ -1,17 +1,21 @@
 <mat-card class="frame">
-	<div class="absenttext" *ngIf="!flag">To add a person as a friend click on the <mat-icon class="absenticon">search</mat-icon> icon on the right corner of the header and search the person username</div>
+	<div *ngIf="ld" class="loader-div">
+		<div class="loader" >Loading...</div>
+	</div>
+	<div class="absenttext" *ngIf="!flag && !ld"><div style="margin-top: 55%">To add a person as a friend click on the <mat-icon class="absenticon">search</mat-icon> icon on the right corner of the header and search the person username</div></div>
 	<div class="sh" *ngIf="flag">
 	<input type="text" class="search" [(ngModel)]="searchText" (ngModelChange)="filt()"placeholder="enter text"><mat-icon>search</mat-icon></div>
-	<div class="us" *ngIf="flag">
+	<div class="us" *ngIf="flag && !ld">
 	<mat-card class="suser" [ngClass]="{'addition':activeArray[i]}" *ngFor="let user of users;let i=index" (click)="userSelected(user,i)">
-		<img [src]="user.image" alt="Avatar">
+		<div><img (click)="openProfileImg($event,user.image,user.name,user.about)"[src]="user.image" alt="Avatar"></div>
 		<div class="content">
 			<div class="content_name">{{user.name}}</div>
 			<div class="content_status">{{user.about}}</div>
                 
 		</div>
+		<div class="del"><i class="far fa-trash-alt" matTooltip="Remove" (click)="openDialog($event,user.id,user.name)"></i></div>
 		<span class="dot" *ngIf="noti[i]"></span>
 			
 	</mat-card>
-   </div>
+	</div>
 </mat-card>

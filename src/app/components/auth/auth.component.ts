@@ -12,12 +12,16 @@ import { ChatService } from '../../services/chat.service';
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
-})
+}) 
 export class AuthComponent implements OnInit {
- 
+  
   constructor(private chatService:ChatService,private router : Router,private snackBar: MatSnackBar,public dialogRef: MatDialogRef<AuthComponent>,@Inject(MAT_DIALOG_DATA) public data,private authService : AuthService) { }
 
   ngOnInit() {
+    const AUTHORIZE_URL = "https://github.com/login/oauth/authorize";
+const REDIRECT_URL = "http://localhost:4000/userAuth/login";
+const ENCODEC_REDIRECT_URL = encodeURIComponent(REDIRECT_URL);
+const CLIENT_ID = "58d2ec94ff7ad976e6c2";
   }
     onNoClick(): void {
       this.dialogRef.close();

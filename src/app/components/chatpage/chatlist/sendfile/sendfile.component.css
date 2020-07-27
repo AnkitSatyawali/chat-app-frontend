@@ -10,3 +10,11 @@
 	color:white;
 	font-weight: bold;
 }
+.ld{
+	font-family: 'Poppins';
+	text-align: center;
+}
+mat-progress-bar{
+	width: 50rem;
+	height:1.5rem;
+}

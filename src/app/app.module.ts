@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule ,HttpClient } from '@angular/common/http';
+
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -18,6 +19,11 @@ import { SendfileComponent } from './components/chatpage/chatlist/sendfile/sendf
 import { OpenimageComponent } from './components/chatpage/chatlist/openimage/openimage.component';
 import { TestVideoComponent } from './components/chatpage/chatlist/test-video/test-video.component';
 import { AudiochatComponent } from './components/chatpage/chatlist/audiochat/audiochat.component';
+import { LoginComponent } from './components/login/login.component';
+import { AboutComponent } from './components/about/about.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { DeleteComponent } from './components/delete/delete.component';
+import { ProfileImageComponent } from './components/chatpage/profile-image/profile-image.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +37,12 @@ import { AudiochatComponent } from './components/chatpage/chatlist/audiochat/aud
     SendfileComponent,
     OpenimageComponent,
     TestVideoComponent,
-    AudiochatComponent
+    AudiochatComponent,
+    LoginComponent,
+    AboutComponent,
+    EditProfileComponent,
+    DeleteComponent,
+    ProfileImageComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +55,6 @@ import { AudiochatComponent } from './components/chatpage/chatlist/audiochat/aud
   ],
   providers: [HttpClient,CookieService],
   bootstrap: [AppComponent],
-  entryComponents: [AuthComponent,SendfileComponent,OpenimageComponent,AudiochatComponent]
+  entryComponents: [AuthComponent,SendfileComponent,OpenimageComponent,AudiochatComponent,DeleteComponent,ProfileImageComponent]
 })
 export class AppModule { }

@@ -17,7 +17,12 @@
 	</div> -->
 
 </mat-toolbar>
-<div class="board" *ngIf="show" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+<div  [ngClass]="{'board-im':ld,'board':!ld}" *ngIf="show" #scrollMe  (scroll)="scrollHandler($event)" >
+	<div *ngIf="ld" class="loader-div">
+		<div class="loader" >Loading...</div>
+	</div>
+	<div *ngIf="!ld">
+	<div *ngIf="ld1 && !forreply" class="sclo"><mat-spinner [diameter]='20' style="margin:0px auto"></mat-spinner></div>
 	<div class="wrap" *ngFor="let message of messageArray" >
 	<div style="width:100%">
 	<div class="message" *ngIf="message.sender!==id.name && !message.isFile">
@@ -89,13 +94,14 @@
     </div>
 </div>
 </div>
-<mat-toolbar *ngIf="show">
+</div>
+<mat-toolbar *ngIf="show && !forreply" class="m">
 	    <textarea [(ngModel)]="message" type="text" placeholder="Type your message" class="mess"></textarea>
 	    <div class="attachment">
 	    	<mat-icon class="attachicon" (click)="filePicker.click()" matTooltip="Share files">playlist_add</mat-icon>
 	    	<input style="display: none;" type="file" #filePicker (change)="onImagePicked($event.target.files)" multiple/>
 	    </div>
-        <mat-icon class="send" (click)="send(message)" *ngIf="message!==''">send</mat-icon>
+        <mat-icon class="send" (click)="send(message)" *ngIf="message.trim()!==''">send</mat-icon>
 </mat-toolbar>
 </div>
 

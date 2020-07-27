@@ -12,9 +12,9 @@ link;
   constructor(public dialogRef: MatDialogRef<OpenimageComponent>,@Inject(MAT_DIALOG_DATA) public data) { }
 
   ngOnInit() {
-  	console.log(this.data);
+  	// console.log(this.data);
   	this.link = `${API_URL}`+this.data;
-  	console.log(this.link);
+  	// console.log(this.link);
   } 
   onNoClick(): void {
       this.dialogRef.close();

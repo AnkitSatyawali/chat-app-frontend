@@ -1,4 +1,4 @@
-<div mat-dialog-content>
+<div mat-dialog-content *ngIf="!up">
   <mat-list>
   	<mat-list-item *ngFor="let f of fileArray;let i=index">
   			<mat-divider></mat-divider>
@@ -13,7 +13,11 @@
   </mat-list>
   <mat-divider></mat-divider>
 </div>
-<div class="buttons">
+<div *ngIf="up" class="ld">
+  <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+  <div>Uploading Files</div>
+</div>
+<div class="buttons" *ngIf="!up">
   <button mat-raised-button (click)="onNoClick()">Cancel</button>
   <span class="spacing"></span>
   <button mat-raised-button (click)="sendMessage()">Send</button>

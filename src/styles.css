@@ -11,7 +11,23 @@
 
 body{
 	margin:0px;
+	padding:0px;
 	height:100%;
-	background: -webkit-linear-gradient(45deg, rgba(255,0,255,1) 0%, rgba(0,255,255,1) 100%);
-	overflow: hidden;
+	/*background: -webkit-linear-gradient(45deg, rgba(255,0,255,1) 0%, rgba(0,255,255,1) 100%);*/
+	/*overflow-x: hidden;*/
+}
+.notify{
+	text-align: center;
+	font-size: 3vw;
+	margin-top: 50%;
+	display: none;
+}
+@media screen and (max-width:700px)
+{
+	.notify{
+		display: block;
+	}
+	app-root{
+		display: none;
+	}
 }

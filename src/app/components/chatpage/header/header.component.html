@@ -1,14 +1,20 @@
 <mat-toolbar>
-	<img class="logo" src="../../../assets/image/logo.png">
-	U-Chat
+	<img class="logo" src="../../../assets/image/newlogocolor.png">
+	<span class="logonew">GitForker</span>
 
 <form class="example-form" *ngIf="seh">
   <mat-form-field class="example-full-width">
-    <input type="text" placeholder="enter name" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <input type="text" placeholder="enter name" aria-label="Number" matInput (keyup)="search($event)" [formControl]="myControl" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete">
-      <mat-option class="op" *ngFor="let option of filteredOptions | async" [value]="option.name" (click)="selectedUser(option)">
+        <mat-option class="op" *ngIf="load">
+            <div class="loader"></div>
+          </mat-option>
+      <mat-option class="op" *ngFor="let result of results" [value]="result.name" (click)="selectedUser(result)">
       	<div matTooltip="Add friend"style="display: flex">
-        <img class="image"[src]="option.image" alt="Avatar"><div class="name" >{{option.name}}</div></div>
+        <img class="image"[src]="result.image" alt="Avatar"><div class="name" >{{result.name}}</div></div>
+      </mat-option>
+      <mat-option class="op" *ngIf="noResults">
+        No results found
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
