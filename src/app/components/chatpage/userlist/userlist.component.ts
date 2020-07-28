@@ -48,7 +48,7 @@ savedNotification;
     })
       this.authService.getId().subscribe(data => {
       this.id = data;
-      // console.log(this.id);
+      console.log(this.id);
     })
     this.authService.getFriends().subscribe(data =>{
       // console.log(data);

@@ -53,7 +53,14 @@ private socket = io('https://gitforker-backend.herokuapp.com');
     this.cookieService.set('githubToken',token2,365,'/');
   }
   getId(){
-    if(this.httpOptions)
+    this.httpOptions = {
+      
+      headers: new HttpHeaders({
+  
+        'authorization':  this.cookieService.get('authorization')
+  
+      })
+    };
     return this.http.get<any>(`${API_URL}userAuth/getId`,this.httpOptions);	
   }
   loginCheckWithoutCookies(token)

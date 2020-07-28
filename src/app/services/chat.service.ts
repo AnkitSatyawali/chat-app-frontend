@@ -21,7 +21,7 @@ export class ChatService {
     
     joinRoom(roomname,name)
     {
-        console.log(roomname);
+        // console.log(roomname);
         const data = {
             roomName : roomname,
             name : name
