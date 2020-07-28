@@ -106,7 +106,7 @@ private socket = io('https://gitforker-backend.herokuapp.com');
     this.router.navigate(['/']);
   }
     deleteUserTokenCookie(){
-    this.cookieService.delete('authorization')
+    this.cookieService.deleteAll();
   }
   isUserLoggedIn(route){
     this.getId().subscribe(data => {
