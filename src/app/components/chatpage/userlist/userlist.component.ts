@@ -49,8 +49,7 @@ savedNotification;
       this.authService.getId().subscribe(data => {
       this.id = data;
       console.log(this.id);
-    })
-    this.authService.getFriends().subscribe(data =>{
+	  this.authService.getFriends().subscribe(data =>{
       // console.log(data);
       this.users = data.friends;
       this.rooms = data.rooms;
@@ -99,6 +98,8 @@ savedNotification;
     },err =>{
       console.log(err);
     })
+    })
+    
     this.userService.added.subscribe(user => {
       // console.log(user);
       this.puser = user;
