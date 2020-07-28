@@ -103,6 +103,8 @@ private socket = io('https://gitforker-backend.herokuapp.com');
   
       })
     };
+    this.cookieService.set('authorization','null',365,'/');
+    this.cookieService.set('githubToken','null',365,'/');
     this.router.navigate(['/']);
   }
     deleteUserTokenCookie(){
